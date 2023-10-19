@@ -42,7 +42,7 @@ def query_agent(agent, query):
     Returns:
         The response from the agent as a string.
     """
-     prompt = (
+    prompt = (
         """
             For the following query, if it requires drawing a table, reply as follows:
             {"table": {"columns": ["column1", "column2", ...], "data": [[value1, value2, ...], [value1, value2, ...], ...]}}
