@@ -1,6 +1,7 @@
 # agent.py
 from langchain import OpenAI
-from langchain.agents import create_pandas_dataframe_agent
+#from langchain.agents import create_pandas_dataframe_agent
+from azure.ai.textanalytics import TextAnalyticsClient
 import pandas as pd
 
 # Setting up the api key
@@ -30,8 +31,8 @@ def create_agent(filename: str):
     df = pd.read_csv(filename)
 
     # Create a Pandas DataFrame agent.
-    return create_pandas_dataframe_agent(llm, df, verbose=False)
-
+    #return create_pandas_dataframe_agent(llm, df, verbose=False)
+    return TextAnalyticsClient(llm,df, verbose=False)
 #agent.py
 
 def query_agent(agent, query):
