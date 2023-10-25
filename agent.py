@@ -1,9 +1,17 @@
 # agent.py
 from langchain import OpenAI
 #from langchain.agents import create_pandas_dataframe_agent
+from azure.identity import DefaultAzureCredential
 from azure.ai.textanalytics import TextAnalyticsClient
 import pandas as pd
 
+credential = DefaultAzureCredential()
+
+text_analytics_client = TextAnalyticsClient(
+    endpoint="https://aoiaipsi.openai.azure.com",
+    credential=credential,
+)
+    
 # Setting up the api key
 import environ
 
