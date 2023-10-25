@@ -2,6 +2,7 @@ langchain
 openai
 streamlit
 python-environ
+python-dotenv
 tabulate
 azure-mgmt-compute
 azure-ai-textanalytics
