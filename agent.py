@@ -88,7 +88,8 @@ def query_agent(agent, query):
          + query
     )
     # run the prompt through the agent
-    response = agent.run(prompt)
+    #response = agent.run(prompt)
+    response = text_analytics_client.analyze_sentiment(documents=["This is a great product."])
     # convert the response to the string
     return response.__str__()
 
