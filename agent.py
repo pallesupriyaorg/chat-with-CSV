@@ -5,12 +5,9 @@ from azure.identity import DefaultAzureCredential
 from azure.ai.textanalytics import TextAnalyticsClient
 import pandas as pd
 
-credential = DefaultAzureCredential()
+#credential = DefaultAzureCredential()
 
-text_analytics_client = TextAnalyticsClient(
-    endpoint="https://aoiaipsi.openai.azure.com",
-    credential=credential,
-)
+#text_analytics_client = TextAnalyticsClient(endpoint="https://aoiaipsi.openai.azure.com", credential=credential)
     
 # Setting up the api key
 import environ
@@ -33,14 +30,16 @@ def create_agent(filename: str):
     """
 
     # Create an OpenAI object.
-    llm = OpenAI(openai_api_key=API_KEY)
+     credential = DefaultAzureCredential()
+    #llm = OpenAI(openai_api_key=API_KEY)
 
     # Read the CSV file into a Pandas DataFrame.
-    df = pd.read_csv(filename)
-
+    #df = pd.read_csv(filename)
+     text_analytics_client = TextAnalyticsClient(endpoint="https://aoiaipsi.openai.azure.com", credential=credential)
     # Create a Pandas DataFrame agent.
     #return create_pandas_dataframe_agent(llm, df, verbose=False)
-    return TextAnalyticsClient(llm,df, verbose=False)
+    #return TextAnalyticsClient(llm,df, verbose=False)
+     return (text_analytics_client)
 #agent.py
 
 def query_agent(agent, query):
