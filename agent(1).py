@@ -19,7 +19,7 @@ llm = AzureOpenAI(
 
 pandas_ai = PandasAI(llm)
 
-st.title("Chat with your CSV")
+st.title("👨‍💻 Chat with your CSV")
 uploaded_file = st.sidebar.file_uploader("upload a file",type=['csv'])
 
 if uploaded_file is not None:
