@@ -4,5 +4,6 @@ streamlit
 python-environ
 tabulate
 azure-mgmt-compute
+azure-ai-textanalytics
 azure-identity
 botbuilder
