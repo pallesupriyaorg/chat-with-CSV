@@ -3,5 +3,5 @@ openai
 streamlit
 python-environ
 tabulate
-azure
+azure-mgmt-compute
 botbuilder
