@@ -1,5 +1,5 @@
 langchain
-openai
+pandasai
 streamlit
 python-environ
 python-dotenv
@@ -8,4 +8,3 @@ azure-mgmt-compute
 azure-ai-textanalytics
 azure-identity
 botbuilder
-pandasai
