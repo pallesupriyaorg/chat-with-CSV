@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import json
+import io
+import os
+import matplotlib.pyplot as plt
+from langchain.document_loaders import CSVLoader
 
 from agent import query_agent, create_agent
 
@@ -58,13 +62,13 @@ st.title("👨‍💻 Chat with your CSV")
 
 st.write("Please upload your CSV file below.")
 
-data = st.file_uploader("Upload a CSV")
+uploaded_file = st.file_uploader("Upload a CSV")
 
 query = st.text_area("Insert your query")
 
 if st.button("Submit Query", type="primary"):
     # Create an agent from the CSV file.
-    agent = create_agent(data)
+    agent = create_agent(uploaded_file)
     # Query the agent.
     response = query_agent(agent=agent, query=query)
     # Decode the response.
