@@ -1,21 +1,29 @@
 # agent.py
-from langchain import OpenAI
-#from langchain.agents import create_pandas_dataframe_agent
-from azure.identity import DefaultAzureCredential
-from azure.ai.textanalytics import TextAnalyticsClient
-import pandas as pd
+from dotenv import load_dotenv
+from pandasai import PandasAI
+from pandasai.llm import AzureOpenAI
+from langchain.agents import create_pandas_dataframe_agent
+#from azure.identity import DefaultAzureCredential
+#from azure.ai.textanalytics import TextAnalyticsClient
+import os
+import streamlit as st
+import pandas as pd 
+from langchain.document_loaders import CSVLoader
+import matplotlib.pyplot as plt
 
-#credential = DefaultAzureCredential()
 
-#text_analytics_client = TextAnalyticsClient(endpoint="https://aoiaipsi.openai.azure.com", credential=credential)
-    
+load_dotenv()    
+
+
+
+
 # Setting up the api key
 import environ
 
-env = environ.Env()
-environ.Env.read_env()
+#env = environ.Env()
+#environ.Env.read_env()
 
-API_KEY = env("apikey")
+#API_KEY = env("apikey")
 
 
 def create_agent(filename: str):
@@ -30,16 +38,23 @@ def create_agent(filename: str):
     """
 
     # Create an OpenAI object.
-    credential = DefaultAzureCredential()
+    #credential = DefaultAzureCredential()
     #llm = OpenAI(openai_api_key=API_KEY)
+    llm = AzureOpenAI(
+      api_token="f769445c82844edda56668cb92806c21",
+      api_base="https://aoiaipsi.openai.azure.com",
+      api_version="2023-07-01-preview",
+      deployment_name="gpt-35-turbo-0613")
+
 
     # Read the CSV file into a Pandas DataFrame.
-    #df = pd.read_csv(filename)
-    text_analytics_client = TextAnalyticsClient(endpoint="https://aoiaipsi.openai.azure.com", credential=credential)
+    df = pd.read_csv(filename)
+   
     # Create a Pandas DataFrame agent.
+    #pandas_ai = PandasAI(llm)
+    return PandasAI(llm)
     #return create_pandas_dataframe_agent(llm, df, verbose=False)
-    #return TextAnalyticsClient(llm,df, verbose=False)
-    return (text_analytics_client)
+    
 #agent.py
 
 def query_agent(agent, query):
@@ -88,8 +103,9 @@ def query_agent(agent, query):
          + query
     )
     # run the prompt through the agent
-    #response = agent.run(prompt)
-    response = text_analytics_client.analyze_sentiment(documents=["This is a great product."])
+    response = agent.run(prompt)
+    #response = text_analytics_client.analyze_sentiment(documents=["This is a great product."])
+    
     # convert the response to the string
     return response.__str__()
 
