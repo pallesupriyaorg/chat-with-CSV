@@ -69,7 +69,7 @@ def write_response(response_dict: dict):
 
 
 
-st.title("👨‍💻 Chat with your CSV")
+st.title("Chat with your CSV")
 st.write("Please upload your CSV file below.")
 uploaded_file = st.file_uploader("Upload a CSV")
 #uploaded_file = st.sidebar.file_uploader("upload a file",type=['csv'])
